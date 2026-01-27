@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <rect x="10" y="60" width="40" height="50" fill="#E5E7EB" rx="2"/>
+  <rect x="15" y="65" width="30" height="5" fill="#9CA3AF"/>
+  <rect x="15" y="75" width="25" height="3" fill="#D1D5DB"/>
+  <rect x="15" y="82" width="28" height="3" fill="#D1D5DB"/>
+  <rect x="15" y="89" width="22" height="3" fill="#D1D5DB"/>
+  <rect x="55" y="55" width="40" height="50" fill="#E5E7EB" rx="2"/>
+  <rect x="60" y="60" width="30" height="5" fill="#9CA3AF"/>
+  <rect x="60" y="70" width="25" height="3" fill="#D1D5DB"/>
+  <rect x="25" y="30" width="40" height="50" fill="#F3F4F6" rx="2"/>
+  <rect x="30" y="35" width="30" height="5" fill="#9CA3AF"/>
+  <rect x="30" y="45" width="25" height="3" fill="#D1D5DB"/>
+  <rect x="30" y="52" width="28" height="3" fill="#D1D5DB"/>
+  <rect x="30" y="59" width="22" height="3" fill="#D1D5DB"/>
+  <rect x="30" y="66" width="26" height="3" fill="#D1D5DB"/>
+  <circle cx="90" cy="25" r="15" fill="#FF6B6B" opacity="0.8"/>
+  <text x="90" y="30" text-anchor="middle" fill="white" font-size="14">😩</text>
+</svg>

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企業 AI 轉型體驗 | 5分鐘感受效率革命</title>
+    <meta name="description" content="親身體驗 AI 如何為企業省下每月 240 小時人力成本。6 個實際案例，讓您親眼見證 AI 效益。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Inter:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar">
+        <div class="progress-fill"></div>
+        <span class="progress-text">案例 <span id="currentCase">0</span> / 6</span>
+    </div>
+
+    <!-- Section 0: Hero -->
+    <section class="section hero-section" id="hero">
+        <div class="hero-content">
+            <div class="urgency-badge">
+                <span class="pulse-dot"></span>
+                87% 的同業已經開始導入 AI
+            </div>
+            <h1 class="hero-title">
+                每天不用 AI<br>
+                <span class="text-danger">您的企業正在流失看不見的成本</span>
+            </h1>
+            <p class="hero-subtitle">
+                5 分鐘體驗 6 個實際案例<br>
+                看看 AI 如何每月為企業省下 <strong>240 小時</strong>人力
+            </p>
+            <button class="cta-button primary-cta" id="startBtn">
+                <span class="cta-icon">▶</span>
+                開始體驗 AI 效率
+            </button>
+            <p class="hero-note">無需註冊，立即互動體驗</p>
+        </div>
+        <div class="scroll-indicator">
+            <span>往下滑動</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Section 1: Finance Reconciliation - REALISTIC CHALLENGE -->
+    <section class="section case-section" id="case1" data-case="1">
+        <div class="case-header">
+            <span class="case-number">案例 1</span>
+            <div class="case-icon finance-icon">💰</div>
+        </div>
+        <h2 class="case-title">財務每月花 40 小時對帳？</h2>
+        <p class="case-pain">
+            親自體驗一下：<span class="text-danger">請找出下面兩張表的差異在哪裡</span>
+        </p>
+
+        <div class="demo-container reconciliation-demo">
+            <!-- Phase 1: Manual Challenge -->
+            <div class="reconciliation-challenge" id="manualChallenge">
+                <div class="timer-display">
+                    <span class="timer-label">已花費時間</span>
+                    <span class="timer-value" id="manualTimer">00:00</span>
+                </div>
+
+                <div class="ledger-comparison">
+                    <div class="ledger-panel">
+                        <div class="ledger-header bank-header">
+                            <span>🏦 銀行對帳單</span>
+                        </div>
+                        <table class="ledger-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>摘要</th>
+                                    <th>金額</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>01/02</td>
+                                    <td>客戶A貨款</td>
+                                    <td class="amount">+125,000</td>
+                                </tr>
+                                <tr>
+                                    <td>01/05</td>
+                                    <td>供應商B付款</td>
+                                    <td class="amount neg">-48,500</td>
+                                </tr>
+                                <tr>
+                                    <td>01/08</td>
+                                    <td>客戶C貨款</td>
+                                    <td class="amount">+87,200</td>
+                                </tr>
+                                <tr>
+                                    <td>01/12</td>
+                                    <td>水電費</td>
+                                    <td class="amount neg">-12,350</td>
+                                </tr>
+                                <tr>
+                                    <td>01/15</td>
+                                    <td>客戶D貨款</td>
+                                    <td class="amount">+63,800</td>
+                                </tr>
+                                <tr>
+                                    <td>01/18</td>
+                                    <td>供應商E付款</td>
+                                    <td class="amount neg">-95,000</td>
+                                </tr>
+                                <tr>
+                                    <td>01/22</td>
+                                    <td>客戶F貨款</td>
+                                    <td class="amount">+156,400</td>
+                                </tr>
+                                <tr>
+                                    <td>01/25</td>
+                                    <td>薪資轉帳</td>
+                                    <td class="amount neg">-284,000</td>
+                                </tr>
+                                <tr>
+                                    <td>01/28</td>
+                                    <td>客戶G貨款</td>
+                                    <td class="amount">+42,150</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="ledger-panel">
+                        <div class="ledger-header company-header">
+                            <span>📊 公司帳本記錄</span>
+                        </div>
+                        <table class="ledger-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>摘要</th>
+                                    <th>金額</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>01/02</td>
+                                    <td>客戶A貨款</td>
+                                    <td class="amount">+125,000</td>
+                                </tr>
+                                <tr>
+                                    <td>01/05</td>
+                                    <td>供應商B付款</td>
+                                    <td class="amount neg">-48,500</td>
+                                </tr>
+                                <tr>
+                                    <td>01/08</td>
+                                    <td>客戶C貨款</td>
+                                    <td class="amount">+87,200</td>
+                                </tr>
+                                <tr>
+                                    <td>01/12</td>
+                                    <td>水電費</td>
+                                    <td class="amount neg">-12,350</td>
+                                </tr>
+                                <tr>
+                                    <td>01/15</td>
+                                    <td>客戶D貨款</td>
+                                    <td class="amount">+63,800</td>
+                                </tr>
+                                <tr>
+                                    <td>01/18</td>
+                                    <td>供應商E付款</td>
+                                    <td class="amount neg">-95,000</td>
+                                </tr>
+                                <tr>
+                                    <td>01/22</td>
+                                    <td>客戶F貨款</td>
+                                    <td class="amount">+156,400</td>
+                                </tr>
+                                <tr>
+                                    <td>01/25</td>
+                                    <td>薪資轉帳</td>
+                                    <td class="amount neg">-284,000</td>
+                                </tr>
+                                <tr>
+                                    <td>01/28</td>
+                                    <td>客戶G貨款</td>
+                                    <td class="amount">+42,150</td>
+                                </tr>
+                                <tr class="hidden-discrepancy">
+                                    <td>01/30</td>
+                                    <td>利息收入</td>
+                                    <td class="amount">+1,285</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <p class="challenge-hint" id="challengeHint">
+                    💡 提示：兩張表有一筆差異，找找看？
+                </p>
+
+                <div class="challenge-actions">
+                    <button class="give-up-btn" id="giveUpBtn">
+                        😫 太累了，讓 AI 來找
+                    </button>
+                </div>
+            </div>
+
+            <!-- Phase 2: AI Solution -->
+            <div class="ai-solution hidden" id="aiSolution">
+                <div class="ai-scanning">
+                    <div class="scan-animation">
+                        <div class="scan-bar"></div>
+                    </div>
+                    <p>AI 正在比對 <span id="comparisonCount">0</span> 筆資料...</p>
+                </div>
+            </div>
+
+            <!-- Phase 3: Result -->
+            <div class="reconciliation-result hidden" id="reconciliationResult">
+                <div class="result-comparison">
+                    <div class="your-time">
+                        <p class="time-label">您剛剛花了</p>
+                        <p class="time-value text-danger" id="yourTimeResult">--:--</p>
+                        <p class="time-note">而且還沒找到 😅</p>
+                    </div>
+                    <div class="vs-divider">VS</div>
+                    <div class="ai-time">
+                        <p class="time-label">AI 只花了</p>
+                        <p class="time-value text-success">0.3 秒</p>
+                        <p class="time-note">已找到全部差異 ✓</p>
+                    </div>
+                </div>
+
+                <div class="discrepancy-found">
+                    <div class="discrepancy-header">
+                        <span class="alert-icon">🔍</span>
+                        AI 發現 1 筆異常
+                    </div>
+                    <div class="discrepancy-detail">
+                        <div class="discrepancy-row">
+                            <span class="discrepancy-label">異常項目</span>
+                            <span class="discrepancy-value">01/30 利息收入 +1,285 元</span>
+                        </div>
+                        <div class="discrepancy-row">
+                            <span class="discrepancy-label">問題</span>
+                            <span class="discrepancy-value text-danger">公司帳本有此筆，銀行對帳單漏記</span>
+                        </div>
+                        <div class="discrepancy-row">
+                            <span class="discrepancy-label">建議</span>
+                            <span class="discrepancy-value">請確認銀行是否已入帳，或為跨月份款項</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pain-point-summary">
+                    <p class="pain-stat">
+                        <span class="stat-icon">📊</span>
+                        實際業界案例：某製造業財務每月對帳 <strong>2,847 筆</strong> 交易
+                    </p>
+                    <p class="pain-stat">
+                        <span class="stat-icon">⏰</span>
+                        人工需要 <strong class="text-danger">40 小時</strong>，AI 只要 <strong class="text-success">3 分鐘</strong>
+                    </p>
+                    <p class="pain-stat">
+                        <span class="stat-icon">💰</span>
+                        每月節省人力成本 <strong class="text-success">NT$ 24,000</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <button class="next-case-btn hidden" id="nextCase1Btn" data-next="case2">
+            下一個案例 →
+        </button>
+    </section>
+
+    <!-- Section 2: HR Resume Screening -->
+    <section class="section case-section" id="case2" data-case="2">
+        <div class="case-header">
+            <span class="case-number">案例 2</span>
+            <div class="case-icon hr-icon">👥</div>
+        </div>
+        <h2 class="case-title">HR 每月篩 500 份履歷，眼睛都花了？</h2>
+        <p class="case-pain">
+            人才市場競爭激烈<br>
+            <span class="text-danger">好人才等不及你慢慢看</span>
+        </p>
+
+        <div class="demo-container resume-demo">
+            <div class="upload-zone" id="resumeUpload">
+                <div class="upload-icon">📄</div>
+                <p class="upload-text">點擊上傳履歷（或使用範例）</p>
+                <button class="use-sample-btn" id="useSampleResume">使用範例履歷</button>
+            </div>
+
+            <div class="processing-animation hidden" id="resumeProcessing">
+                <div class="scanning-line"></div>
+                <p>AI 正在分析履歷...</p>
+            </div>
+
+            <div class="result-display hidden" id="resumeResult">
+                <div class="resume-cards">
+                    <div class="resume-card best-match">
+                        <div class="match-badge">最佳人選</div>
+                        <div class="candidate-avatar">👤</div>
+                        <p class="candidate-name">王小明</p>
+                        <div class="match-score">
+                            <span class="score-value">92%</span>
+                            <span class="score-label">適合度</span>
+                        </div>
+                        <p class="candidate-highlight">5年相關經驗 · 技能完全匹配</p>
+                    </div>
+                    <div class="resume-card">
+                        <div class="candidate-avatar">👤</div>
+                        <p class="candidate-name">李大華</p>
+                        <div class="match-score">
+                            <span class="score-value">78%</span>
+                            <span class="score-label">適合度</span>
+                        </div>
+                    </div>
+                    <div class="resume-card">
+                        <div class="candidate-avatar">👤</div>
+                        <p class="candidate-name">張美玲</p>
+                        <div class="match-score">
+                            <span class="score-value">65%</span>
+                            <span class="score-label">適合度</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="time-comparison">
+                    <p>傳統篩選需要 <span class="old-time">40 小時</span></p>
+                    <p>AI 只要 <span class="new-time">3 秒</span> 完成排序</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="next-case-btn" data-next="case3">
+            下一個案例 →
+        </button>
+    </section>
+
+    <!-- Section 3: Maintenance Report -->
+    <section class="section case-section" id="case3" data-case="3">
+        <div class="case-header">
+            <span class="case-number">案例 3</span>
+            <div class="case-icon maintenance-icon">🔧</div>
+        </div>
+        <h2 class="case-title">老師傅退休了，維修經驗帶不走？</h2>
+        <p class="case-pain">
+            30年經驗全在腦袋裡<br>
+            <span class="text-danger">新人接手手忙腳亂</span>
+        </p>
+
+        <div class="demo-container maintenance-demo">
+            <div class="machine-display">
+                <div class="machine-icon" id="machineIcon">⚙️</div>
+                <p class="machine-status normal">設備運行中</p>
+            </div>
+
+            <div class="fault-buttons">
+                <button class="fault-btn" id="triggerFault">
+                    <span class="fault-icon">⚠️</span>
+                    模擬故障：馬達異音
+                </button>
+            </div>
+
+            <div class="ai-assistant hidden" id="aiAssistant">
+                <button class="ai-btn" id="generateReport">
+                    <span class="ai-icon">🤖</span>
+                    AI 智能助理
+                </button>
+            </div>
+
+            <div class="report-output hidden" id="reportOutput">
+                <div class="report-header">
+                    <span class="report-icon">📋</span>
+                    維修報告
+                </div>
+                <div class="report-content" id="reportContent">
+                    <!-- Typewriter effect content -->
+                </div>
+                <div class="report-footer">
+                    <p class="time-saved">這份報告過去要老師傅寫 <span class="old-time">30 分鐘</span></p>
+                </div>
+            </div>
+        </div>
+
+        <button class="next-case-btn" data-next="case4">
+            下一個案例 →
+        </button>
+    </section>
+
+    <!-- Section 4: Invoice Recognition -->
+    <section class="section case-section" id="case4" data-case="4">
+        <div class="case-header">
+            <span class="case-number">案例 4</span>
+            <div class="case-icon document-icon">📄</div>
+        </div>
+        <h2 class="case-title">每張發票輸入要 2 分鐘？</h2>
+        <p class="case-pain">
+            一疊發票打字打到手痠<br>
+            <span class="text-danger">還常常 key 錯</span>
+        </p>
+
+        <div class="demo-container invoice-demo">
+            <div class="invoice-upload-area">
+                <div class="invoice-drop-zone" id="invoiceDropZone">
+                    <div class="drop-icon">📎</div>
+                    <p>拖曳發票到這裡</p>
+                    <button class="use-sample-btn" id="useSampleInvoice">使用範例發票</button>
+                </div>
+            </div>
+
+            <div class="invoice-processing hidden" id="invoiceProcessing">
+                <div class="invoice-preview">
+                    <img src="assets/sample-invoice.svg" alt="發票範例" class="invoice-image">
+                    <div class="scan-overlay">
+                        <div class="scan-line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="invoice-result hidden" id="invoiceResult">
+                <div class="invoice-preview recognized">
+                    <img src="assets/sample-invoice.svg" alt="發票範例" class="invoice-image">
+                    <div class="recognition-overlays">
+                        <div class="recog-box date-box">日期</div>
+                        <div class="recog-box amount-box">金額</div>
+                        <div class="recog-box item-box">品項</div>
+                    </div>
+                </div>
+                <div class="extracted-data">
+                    <h4>自動辨識結果</h4>
+                    <div class="data-row">
+                        <span class="data-label">日期</span>
+                        <span class="data-value typewriter" data-text="2024/01/15"></span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">金額</span>
+                        <span class="data-value typewriter" data-text="NT$ 12,500"></span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">品項</span>
+                        <span class="data-value typewriter" data-text="辦公設備採購"></span>
+                    </div>
+                    <div class="accuracy-badge">
+                        <span class="check-icon">✓</span>
+                        辨識準確率 99.7%
+                    </div>
+                </div>
+                <div class="time-comparison">
+                    <p>傳統輸入需要 <span class="old-time">2 分鐘</span></p>
+                    <p>AI 只要 <span class="new-time">3 秒</span></p>
+                </div>
+            </div>
+        </div>
+
+        <button class="next-case-btn" data-next="case5">
+            下一個案例 →
+        </button>
+    </section>
+
+    <!-- Section 5: Quality Inspection -->
+    <section class="section case-section" id="case5" data-case="5">
+        <div class="case-header">
+            <span class="case-number">案例 5</span>
+            <div class="case-icon quality-icon">🔍</div>
+        </div>
+        <h2 class="case-title">品檢員一天看 1000 個零件，能不漏檢？</h2>
+        <p class="case-pain">
+            人眼疲勞、光線變化<br>
+            <span class="text-danger">瑕疵品流出去就是客訴</span>
+        </p>
+
+        <div class="demo-container quality-demo">
+            <div class="product-grid">
+                <div class="product-item" data-defect="false">
+                    <img src="assets/product-ok.svg" alt="合格產品" class="product-image">
+                </div>
+                <div class="product-item" data-defect="true" data-defect-pos="30,40">
+                    <img src="assets/product-defect.svg" alt="瑕疵產品" class="product-image">
+                    <div class="defect-marker hidden"></div>
+                </div>
+                <div class="product-item" data-defect="false">
+                    <img src="assets/product-ok.svg" alt="合格產品" class="product-image">
+                </div>
+                <div class="product-item" data-defect="true" data-defect-pos="60,25">
+                    <img src="assets/product-defect2.svg" alt="瑕疵產品" class="product-image">
+                    <div class="defect-marker hidden"></div>
+                </div>
+            </div>
+
+            <button class="action-btn" id="startInspection">
+                <span class="btn-icon">🔍</span>
+                AI 檢測
+            </button>
+
+            <div class="inspection-result hidden" id="inspectionResult">
+                <div class="result-stats">
+                    <div class="stat-item ok">
+                        <span class="stat-value">2</span>
+                        <span class="stat-label">合格</span>
+                    </div>
+                    <div class="stat-item defect">
+                        <span class="stat-value">2</span>
+                        <span class="stat-label">瑕疵</span>
+                    </div>
+                </div>
+                <div class="inspection-time">
+                    檢測時間：<span class="highlight">0.8 秒</span>
+                </div>
+                <div class="comparison-note">
+                    人工檢查 4 件需要 <span class="old-time">8 分鐘</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="next-case-btn" data-next="case6">
+            下一個案例 →
+        </button>
+    </section>
+
+    <!-- Section 6: Customer Service -->
+    <section class="section case-section" id="case6" data-case="6">
+        <div class="case-header">
+            <span class="case-number">案例 6</span>
+            <div class="case-icon service-icon">💬</div>
+        </div>
+        <h2 class="case-title">客服回一封信要 15 分鐘？</h2>
+        <p class="case-pain">
+            查資料、組織語句、確認政策<br>
+            <span class="text-danger">客戶等得不耐煩</span>
+        </p>
+
+        <div class="demo-container service-demo">
+            <div class="email-display">
+                <div class="email-header">
+                    <span class="email-label">客戶來信</span>
+                </div>
+                <div class="email-content">
+                    <p class="email-subject">主旨：產品故障要求退款</p>
+                    <p class="email-body">
+                        你們的產品才用一個月就壞了！我要求全額退款！這是什麼品質？我會在網路上發文讓大家知道你們的服務有多差！
+                    </p>
+                </div>
+            </div>
+
+            <button class="action-btn" id="generateReply">
+                <span class="btn-icon">🤖</span>
+                AI 助理生成回覆
+            </button>
+
+            <div class="reply-display hidden" id="replyDisplay">
+                <div class="reply-header">
+                    <span class="reply-label">AI 建議回覆</span>
+                    <span class="reply-tone">語氣：專業親切</span>
+                </div>
+                <div class="reply-content" id="replyContent">
+                    <!-- Typewriter content -->
+                </div>
+                <div class="reply-actions">
+                    <button class="reply-action-btn approve">
+                        <span>✓</span> 使用此回覆
+                    </button>
+                    <button class="reply-action-btn edit">
+                        <span>✎</span> 編輯後使用
+                    </button>
+                </div>
+                <div class="time-comparison">
+                    <p>傳統撰寫需要 <span class="old-time">15 分鐘</span></p>
+                    <p>AI 生成只要 <span class="new-time">30 秒</span></p>
+                </div>
+            </div>
+        </div>
+
+        <button class="next-case-btn final-btn" data-next="summary">
+            查看總結 →
+        </button>
+    </section>
+
+    <!-- Section 7: Summary -->
+    <section class="section summary-section" id="summary">
+        <div class="summary-content">
+            <h2 class="summary-title">您剛剛體驗的 6 個 AI 應用</h2>
+            <p class="summary-subtitle">每月可為企業節省：</p>
+
+            <div class="savings-grid">
+                <div class="savings-card time-card">
+                    <div class="card-icon">⏱️</div>
+                    <div class="card-value">
+                        <span class="counter" data-target="240">0</span>
+                        <span class="card-unit">小時</span>
+                    </div>
+                    <p class="card-label">人力時間</p>
+                </div>
+                <div class="savings-card money-card">
+                    <div class="card-icon">💰</div>
+                    <div class="card-value">
+                        <span class="card-prefix">NT$</span>
+                        <span class="counter" data-target="144000">0</span>
+                    </div>
+                    <p class="card-label">成本節省</p>
+                </div>
+                <div class="savings-card error-card">
+                    <div class="card-icon">✓</div>
+                    <div class="card-value">
+                        <span class="counter" data-target="95">0</span>
+                        <span class="card-unit">%</span>
+                    </div>
+                    <p class="card-label">減少人為錯誤</p>
+                </div>
+            </div>
+
+            <div class="urgency-message">
+                <p class="urgency-text">
+                    <span class="warning-icon">⚠️</span>
+                    您的競爭對手可能已經在用了
+                </p>
+            </div>
+
+            <div class="cta-section">
+                <button class="cta-button primary-cta large" id="contactExpert">
+                    聯絡導入專家
+                </button>
+                <p class="cta-note">免費諮詢，量身規劃導入方案</p>
+            </div>
+
+            <button class="restart-btn" id="restartDemo">
+                ↺ 重新體驗
+            </button>
+        </div>
+    </section>
+
+    <!-- Contact Modal -->
+    <div class="modal-overlay hidden" id="contactModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">×</button>
+            <h3 class="modal-title">聯絡導入專家</h3>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="companyName">公司名稱</label>
+                    <input type="text" id="companyName" name="companyName" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactName">聯絡人姓名</label>
+                    <input type="text" id="contactName" name="contactName" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">聯絡電話</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="interest">最感興趣的 AI 應用</label>
+                    <select id="interest" name="interest">
+                        <option value="finance">財務對帳自動化</option>
+                        <option value="hr">HR 履歷智能篩選</option>
+                        <option value="maintenance">維修知識數位化</option>
+                        <option value="document">文書發票辨識</option>
+                        <option value="quality">品質檢測 AI</option>
+                        <option value="service">客服回覆助理</option>
+                        <option value="all">全部都有興趣</option>
+                    </select>
+                </div>
+                <button type="submit" class="cta-button primary-cta">
+                    預約免費諮詢
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
