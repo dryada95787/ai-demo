@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-zh="企業 AI 轉型體驗 | 5分鐘感受效率革命" data-en="Enterprise AI Transformation | 5-Minute Efficiency Experience">企業
         AI 轉型體驗 | 5分鐘感受效率革命</title>
-    <meta name="description" content="我們請人是來「解決問題」，不是來「複製貼上」的。親身體驗 9 個真實辦公場景，看 AI 如何釋放被低效流程綁架的生產力。">
+    <meta name="description" content="我們請人是來「解決問題」，不是來「複製貼上」的。親身體驗 6 個真實辦公場景，看 AI 如何釋放被低效流程綁架的生產力。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -49,11 +49,11 @@
             <p class="hero-subtitle">
                 <span class="lang-zh">
                     這不是未來式，是現在進行式<br>
-                    親眼見證 9 個真實場景，看 AI 如何讓效率翻倍
+                    親眼見證 6 個真實場景，看 AI 如何讓效率翻倍
                 </span>
                 <span class="lang-en hidden">
                     This isn't the future—it's happening now.<br>
-                    Witness 9 real-world scenarios and see how AI multiplies efficiency.
+                    Witness 6 real-world scenarios and see how AI multiplies efficiency.
                 </span>
             </p>
 
@@ -428,7 +428,7 @@
                     </div>
                 </div>
 
-                <button class="next-case-btn hidden" id="nextCase1Btn" data-next="case2">
+                <button class="next-case-btn hidden" id="nextCase1Btn" data-next="case3">
                     <span class="lang-zh">下一個案例 →</span>
                     <span class="lang-en hidden">Next Case →</span>
                 </button>
@@ -436,124 +436,6 @@
         </div>
     </section>
 
-    <!-- Section 2: HR Resume Screening -->
-    <section class="section case-section" id="case2" data-case="2" data-label="履歷篩選">
-        <div class="split-layout">
-            <div class="case-info-panel">
-                <div class="case-header">
-                    <span class="case-number">
-                        <span class="lang-zh">案例 2</span>
-                        <span class="lang-en hidden">Case 2</span>
-                    </span>
-                    <div class="case-icon hr-icon">👥</div>
-                </div>
-                <h2 class="case-title">
-                    <span class="lang-zh">HR 每月篩 500 份履歷，眼睛都花了？</span>
-                    <span class="lang-en hidden">HR Screens 500 Resumes Monthly?</span>
-                </h2>
-                <p class="case-pain">
-                    <span class="lang-zh">人才市場競爭激烈<br><span class="text-danger">好人才等不及你慢慢看</span></span>
-                    <span class="lang-en hidden">Talent market is fierce<br><span class="text-danger">Top Talent Won't
-                            Wait</span></span>
-                </p>
-            </div>
-
-            <div class="case-demo-panel">
-
-                <div class="demo-container resume-demo">
-                    <div class="upload-zone" id="resumeUpload">
-                        <div class="upload-icon">📄</div>
-                        <p class="upload-text">
-                            <span class="lang-zh">點擊上傳履歷（或使用範例）</span>
-                            <span class="lang-en hidden">Click to upload (or use sample)</span>
-                        </p>
-                        <button class="use-sample-btn" id="useSampleResume">
-                            <span class="lang-zh">使用範例履歷</span>
-                            <span class="lang-en hidden">Use Sample Resume</span>
-                        </button>
-                    </div>
-
-                    <div class="processing-animation hidden" id="resumeProcessing">
-                        <div class="scanning-line"></div>
-                        <p>
-                            <span class="lang-zh">AI 正在分析履歷...</span>
-                            <span class="lang-en hidden">AI Analyzing Resumes...</span>
-                        </p>
-                    </div>
-
-                    <div class="result-display hidden" id="resumeResult">
-                        <div class="resume-cards">
-                            <div class="resume-card best-match">
-                                <div class="match-badge">
-                                    <span class="lang-zh">最佳人選</span>
-                                    <span class="lang-en hidden">Best Match</span>
-                                </div>
-                                <div class="candidate-avatar">👤</div>
-                                <p class="candidate-name">
-                                    <span class="lang-zh">王小明</span>
-                                    <span class="lang-en hidden">Alex Wang</span>
-                                </p>
-                                <div class="match-score">
-                                    <span class="score-value">92%</span>
-                                    <span class="score-label">
-                                        <span class="lang-zh">適合度</span>
-                                        <span class="lang-en hidden">Match Score</span>
-                                    </span>
-                                </div>
-                                <p class="candidate-highlight">
-                                    <span class="lang-zh">5年相關經驗 · 技能完全匹配</span>
-                                    <span class="lang-en hidden">5Y Exp · Perfect Skill Match</span>
-                                </p>
-                            </div>
-                            <div class="resume-card">
-                                <div class="candidate-avatar">👤</div>
-                                <p class="candidate-name">
-                                    <span class="lang-zh">李大華</span>
-                                    <span class="lang-en hidden">David Lee</span>
-                                </p>
-                                <div class="match-score">
-                                    <span class="score-value">78%</span>
-                                    <span class="score-label">
-                                        <span class="lang-zh">適合度</span>
-                                        <span class="lang-en hidden">Match Score</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="resume-card">
-                                <div class="candidate-avatar">👤</div>
-                                <p class="candidate-name">
-                                    <span class="lang-zh">張美玲</span>
-                                    <span class="lang-en hidden">Sarah Chang</span>
-                                </p>
-                                <div class="match-score">
-                                    <span class="score-value">65%</span>
-                                    <span class="score-label">
-                                        <span class="lang-zh">適合度</span>
-                                        <span class="lang-en hidden">Match Score</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="time-comparison">
-                            <p>
-                                <span class="lang-zh">傳統篩選需要 <span class="old-time">40 小時</span></span>
-                                <span class="lang-en hidden">Manual: <span class="old-time">40 Hrs</span></span>
-                            </p>
-                            <p>
-                                <span class="lang-zh">AI 只要 <span class="new-time">3 秒</span> 完成排序</span>
-                                <span class="lang-en hidden">AI Sort: <span class="new-time">3 Secs</span></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="next-case-btn" data-next="case3">
-                    <span class="lang-zh">下一個案例 →</span>
-                    <span class="lang-en hidden">Next Case →</span>
-                </button>
-            </div>
-        </div>
-    </section>
 
     <!-- Section 3: Maintenance Report -->
     <section class="section case-section" id="case3" data-case="3" data-label="設備維修">
@@ -561,8 +443,8 @@
             <div class="case-info-panel">
                 <div class="case-header">
                     <span class="case-number">
-                        <span class="lang-zh">案例 3</span>
-                        <span class="lang-en hidden">Case 3</span>
+                        <span class="lang-zh">案例 2</span>
+                        <span class="lang-en hidden">Case 2</span>
                     </span>
                     <div class="case-icon maintenance-icon">🔧</div>
                 </div>
@@ -653,8 +535,8 @@
             <div class="case-info-panel">
                 <div class="case-header">
                     <span class="case-number">
-                        <span class="lang-zh">案例 4</span>
-                        <span class="lang-en hidden">Case 4</span>
+                        <span class="lang-zh">案例 3</span>
+                        <span class="lang-en hidden">Case 3</span>
                     </span>
                     <div class="case-icon office-icon">📑</div>
                 </div>
@@ -756,8 +638,8 @@
             <div class="case-info-panel">
                 <div class="case-header">
                     <span class="case-number">
-                        <span class="lang-zh">案例 5</span>
-                        <span class="lang-en hidden">Case 5</span>
+                        <span class="lang-zh">案例 4</span>
+                        <span class="lang-en hidden">Case 4</span>
                     </span>
                     <div class="case-icon sales-icon">📧</div>
                 </div>
@@ -818,101 +700,6 @@
                         </div>
                     </div>
                 </div>
-                <button class="next-case-btn" data-next="caseMeeting">
-                    <span class="lang-zh">下一個案例 →</span>
-                    <span class="lang-en hidden">Next Case →</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section: Meeting Summary (New) -->
-    <section class="section case-section" id="caseMeeting" data-case="6" data-label="會議記錄">
-        <div class="split-layout">
-            <div class="case-info-panel">
-                <div class="case-header">
-                    <span class="case-number">
-                        <span class="lang-zh">案例 6</span>
-                        <span class="lang-en hidden">Case 6</span>
-                    </span>
-                    <div class="case-icon meeting-icon">🗣️</div>
-                </div>
-                <h2 class="case-title">
-                    <span class="lang-zh">開完會，紀錄誰來寫？</span>
-                    <span class="lang-en hidden">Who Writes the Meeting Minutes?</span>
-                </h2>
-                <p class="case-pain">
-                    <span class="lang-zh">會議長達 2 小時，重點容易遺漏<br><span class="text-danger">會後沒人記得待辦事項</span></span>
-                    <span class="lang-en hidden">2-hour meeting, key points missed<br><span class="text-danger">Action
-                            items
-                            forgotten</span></span>
-                </p>
-            </div>
-
-            <div class="case-demo-panel">
-
-                <div class="demo-container meeting-demo">
-                    <div class="transcript-box">
-                        <div class="scrolling-text">
-                            <span class="lang-zh">
-                                Manager: 我們需要確認 Q3 的行銷預算。<br>
-                                Marketing: 我建議增加 20% 在數位廣告，因為 ROI 很高。<br>
-                                Finance: 同意，但要確保不排擠研發預算。<br>
-                                Manager: 好，那就請 Alice 週五前算出具體數字。<br>
-                                ... (2小時對話) ...
-                            </span>
-                            <span class="lang-en hidden">
-                                Manager: We need to finalize Q3 budget.<br>
-                                Marketing: Suggest +20% on digital ads, high ROI.<br>
-                                Finance: Agreed, but protect R&D budget.<br>
-                                Manager: OK, Alice please calculate numbers by Friday.<br>
-                                ... (2 hours conversation) ...
-                            </span>
-                        </div>
-                    </div>
-
-                    <button class="action-btn" id="summarizeMeetingBtn">
-                        <span class="btn-icon">📝</span>
-                        <span class="lang-zh">生成會議紀要</span>
-                        <span class="lang-en hidden">Generate Minutes</span>
-                    </button>
-
-                    <div class="meeting-result hidden" id="meetingResult">
-                        <div class="summary-card">
-                            <h4><span class="lang-zh">📌 重點摘要</span><span class="lang-en hidden">📌 Summary</span></h4>
-                            <ul>
-                                <li><span class="lang-zh">決議提高 Q3 數位廣告預算 20%。</span><span
-                                        class="lang-en hidden">Decision:
-                                        Increase Q3 digital ad budget by 20%.</span></li>
-                                <li><span class="lang-zh">需確保研發預算不受影響。</span><span class="lang-en hidden">Ensure R&D
-                                        budget
-                                        remains intact.</span></li>
-                            </ul>
-                            <div class="action-items">
-
-                                <h5><span class="lang-zh">✅ 待辦事項 (Action Items)</span><span class="lang-en hidden">✅
-                                        Action
-                                        Items</span></h5>
-                                <div class="todo-item">
-                                    <span class="assignee">Alice</span>
-                                    <span class="task"><span class="lang-zh">計算具體預算分配</span><span
-                                            class="lang-en hidden">Calculate budget allocation</span></span>
-                                    <span class="due-date">Fri</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="time-comparison">
-                            <p>
-                                <span class="lang-zh">人工整理紀錄：<span class="old-time">1 小時</span></span>
-                                <span class="lang-en hidden">Manual Minutes: <span class="old-time">1 Hr</span></span>
-                            </p>
-                            <p>
-                                <span class="lang-zh">AI 生成：<span class="new-time">10 秒</span></span>
-                                <span class="lang-en hidden">AI Gen: <span class="new-time">10 Secs</span></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
                 <button class="next-case-btn" data-next="caseHRGen">
                     <span class="lang-zh">下一個案例 →</span>
                     <span class="lang-en hidden">Next Case →</span>
@@ -921,14 +708,15 @@
         </div>
     </section>
 
+
     <!-- Section: HR GenAI (New) -->
     <section class="section case-section" id="caseHRGen" data-case="7" data-label="HR文案">
         <div class="split-layout">
             <div class="case-info-panel">
                 <div class="case-header">
                     <span class="case-number">
-                        <span class="lang-zh">案例 7</span>
-                        <span class="lang-en hidden">Case 7</span>
+                        <span class="lang-zh">案例 5</span>
+                        <span class="lang-en hidden">Case 5</span>
                     </span>
                     <div class="case-icon hr-gen-icon">✍️</div>
                 </div>
@@ -947,11 +735,7 @@
 
                 <div class="demo-container hr-gen-demo">
                     <div class="task-selector">
-                        <button class="task-btn active" data-task="jd">
-                            <span class="lang-zh">職缺描述 (JD)</span>
-                            <span class="lang-en hidden">Job Desc</span>
-                        </button>
-                        <button class="task-btn" data-task="activity">
+                        <button class="task-btn active" data-task="activity">
                             <span class="lang-zh">員工活動</span>
                             <span class="lang-en hidden">Activity</span>
                         </button>
@@ -962,10 +746,10 @@
                     </div>
 
                     <div class="input-area">
-                        <input type="text" id="hrInput" placeholder="輸入職位名稱 (例如: 資深前端工程師)" value="資深前端工程師"
-                            data-value-zh="資深前端工程師" data-value-en="Senior Frontend Engineer"
-                            data-placeholder-zh="輸入職位名稱 (例如: 資深前端工程師)"
-                            data-placeholder-en="Enter Job Title (e.g., Senior Frontend Engineer)">
+                        <input type="text" id="hrInput" placeholder="輸入活動名稱 (例如: 年度尾牙)" value="年度尾牙"
+                            data-value-zh="年度尾牙" data-value-en="Annual Year-end Party"
+                            data-placeholder-zh="輸入活動名稱 (例如: 年度尾牙)"
+                            data-placeholder-en="Enter Activity Name (e.g., Year-end Party)">
                     </div>
 
                     <button class="action-btn" id="generateHRBtn">
@@ -985,128 +769,6 @@
                         </div>
                     </div>
                 </div>
-                <button class="next-case-btn" data-next="case4">
-                    <span class="lang-zh">下一個案例 →</span>
-                    <span class="lang-en hidden">Next Case →</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 4: Invoice Recognition -->
-    <section class="section case-section" id="case4" data-case="8" data-label="發票辨識">
-        <div class="split-layout">
-            <div class="case-info-panel">
-                <div class="case-header">
-                    <span class="case-number">
-                        <span class="lang-zh">案例 8</span>
-                        <span class="lang-en hidden">Case 8</span>
-                    </span>
-                    <div class="case-icon document-icon">📄</div>
-                </div>
-                <h2 class="case-title">
-                    <span class="lang-zh">每張發票輸入要 2 分鐘？</span>
-                    <span class="lang-en hidden">2 Minutes per Invoice Entry?</span>
-                </h2>
-                <p class="case-pain">
-                    <span class="lang-zh">一疊發票打字打到手痠<br><span class="text-danger">還常常 key 錯</span></span>
-                    <span class="lang-en hidden">Endless typing, endless typos<br><span class="text-danger">Error-prone
-                            process</span></span>
-                </p>
-            </div>
-
-            <div class="case-demo-panel">
-
-                <div class="demo-container invoice-demo">
-                    <div class="invoice-upload-area">
-                        <div class="invoice-drop-zone" id="invoiceDropZone">
-                            <div class="drop-icon">📎</div>
-                            <p>
-                                <span class="lang-zh">拖曳發票到這裡</span>
-                                <span class="lang-en hidden">Drag invoice here</span>
-                            </p>
-                            <button class="use-sample-btn" id="useSampleInvoice">
-                                <span class="lang-zh">使用範例發票</span>
-                                <span class="lang-en hidden">Use Sample Invoice</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="invoice-processing hidden" id="invoiceProcessing">
-                        <div class="invoice-preview">
-                            <img src="assets/images/sample-invoice.svg" alt="發票範例" class="invoice-image">
-                            <div class="scan-overlay">
-                                <div class="scan-line"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="invoice-result hidden" id="invoiceResult">
-                        <div class="invoice-preview recognized">
-                            <img src="assets/images/sample-invoice.svg" alt="發票範例" class="invoice-image">
-                            <div class="recognition-overlays">
-                                <div class="recog-box date-box">
-                                    <span class="lang-zh">日期</span>
-                                    <span class="lang-en hidden">Date</span>
-                                </div>
-                                <div class="recog-box amount-box">
-                                    <span class="lang-zh">金額</span>
-                                    <span class="lang-en hidden">Amt</span>
-                                </div>
-                                <div class="recog-box item-box">
-                                    <span class="lang-zh">品項</span>
-                                    <span class="lang-en hidden">Item</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="extracted-data">
-                            <h4>
-                                <span class="lang-zh">自動辨識結果</span>
-                                <span class="lang-en hidden">Auto-Recognition</span>
-                            </h4>
-                            <div class="data-row">
-                                <span class="data-label">
-                                    <span class="lang-zh">日期</span>
-                                    <span class="lang-en hidden">Date</span>
-                                </span>
-                                <span class="data-value typewriter" data-text-zh="2024/01/15"
-                                    data-text-en="2024/01/15"></span>
-                            </div>
-                            <div class="data-row">
-                                <span class="data-label">
-                                    <span class="lang-zh">金額</span>
-                                    <span class="lang-en hidden">Amount</span>
-                                </span>
-                                <span class="data-value typewriter" data-text-zh="NT$ 12,500"
-                                    data-text-en="NT$ 12,500"></span>
-                            </div>
-                            <div class="data-row">
-                                <span class="data-label">
-                                    <span class="lang-zh">品項</span>
-                                    <span class="lang-en hidden">Item</span>
-                                </span>
-                                <span class="data-value typewriter" data-text-zh="辦公設備採購"
-                                    data-text-en="Office Equipment"></span>
-                            </div>
-                            <div class="accuracy-badge">
-                                <span class="check-icon">✓</span>
-                                <span class="lang-zh">辨識準確率 99.7%</span>
-                                <span class="lang-en hidden">Accuracy 99.7%</span>
-                            </div>
-                        </div>
-                        <div class="time-comparison">
-                            <p>
-                                <span class="lang-zh">傳統輸入需要 <span class="old-time">2 分鐘</span></span>
-                                <span class="lang-en hidden">Manual: <span class="old-time">2 Mins</span></span>
-                            </p>
-                            <p>
-                                <span class="lang-zh">AI 只要 <span class="new-time">3 秒</span></span>
-                                <span class="lang-en hidden">AI: <span class="new-time">3 Secs</span></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
                 <button class="next-case-btn" data-next="case6">
                     <span class="lang-zh">下一個案例 →</span>
                     <span class="lang-en hidden">Next Case →</span>
@@ -1117,14 +779,15 @@
 
 
 
+
     <!-- Section 6: Customer Service -->
     <section class="section case-section" id="case6" data-case="9" data-label="客戶服務">
         <div class="split-layout">
             <div class="case-info-panel">
                 <div class="case-header">
                     <span class="case-number">
-                        <span class="lang-zh">案例 9</span>
-                        <span class="lang-en hidden">Case 9</span>
+                        <span class="lang-zh">案例 6</span>
+                        <span class="lang-en hidden">Case 6</span>
                     </span>
                     <div class="case-icon service-icon">💬</div>
                 </div>
