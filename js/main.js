@@ -7,7 +7,7 @@
 // ============================================
 const state = {
     currentCase: 0,
-    totalCases: 9,
+    totalCases: 6,
     completedCases: new Set(),
     sliderDragging: false
 };
@@ -15,35 +15,30 @@ const state = {
 // ============================================
 // DOM Elements
 // ============================================
-const elements = {
-    progressBar: document.querySelector('.progress-fill'),
-    currentCaseDisplay: document.getElementById('currentCase'),
-    restartBtn: document.getElementById('restartDemo')
-};
+let elements = {};
 
 // ============================================
 // Initialize
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
+    elements = {
+        progressBar: document.querySelector('.progress-fill'),
+        currentCaseDisplay: document.getElementById('currentCase'),
+        startBtn: document.getElementById('startBtn'),
+        restartBtn: document.getElementById('restartDemo')
+    };
     initLanguageSwitcher();
     initNavigation();
     initSlider();
-    initResumeDemo();
     initMaintenanceDemo();
-    initInvoiceDemo();
-    initQualityDemo();
     initServiceDemo();
     initOfficeDemo();
     initSalesDemo();
-    initMeetingDemo();
     initHRGenDemo();
     initSummary();
     initWhyAINow();
     initROIDashboard();
     initHITLProtocol();
-    // initNavDots(); // New Nav Dots REMOVED
-    // initSidebar(); // Sidebar REMOVED
-    initScrollFriction();
 
     // Observe sections for progress tracking
     observeSections();
@@ -95,13 +90,6 @@ function setLanguage(lang) {
     inputs.forEach(input => {
         const val = lang === 'zh' ? input.getAttribute('data-value-zh') : input.getAttribute('data-value-en');
         if (val) input.value = val;
-    });
-
-    // Update input placeholders
-    const placeholderInputs = document.querySelectorAll('input[data-placeholder-zh]');
-    placeholderInputs.forEach(input => {
-        const ph = lang === 'zh' ? input.getAttribute('data-placeholder-zh') : input.getAttribute('data-placeholder-en');
-        if (ph) input.placeholder = ph;
     });
 
     // Toggle visibility for complex HTML blocks
@@ -221,8 +209,9 @@ function initHITLProtocol() {
 // ============================================
 function initNavigation() {
     // Start button
-    // Start button removed
-
+    elements.startBtn?.addEventListener('click', () => {
+        document.getElementById('whyAINow')?.scrollIntoView({ behavior: 'smooth' });
+    });
 
     // Next case buttons
     document.querySelectorAll('.next-case-btn').forEach(btn => {
@@ -259,45 +248,6 @@ function updateProgress() {
     const progress = ((currentIndex + 1) / total) * 100;
     elements.progressBar.style.width = `${progress}%`;
     elements.currentCaseDisplay.textContent = currentIndex + 1;
-
-    // Update Sidebar Active State
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach((item, index) => {
-        item.classList.remove('active', 'completed');
-
-        // Match by data-target vs sections
-        // But sections list might include things not in sidebar, or vice versa.
-        // Safer to find index in navItems.
-
-        // Let's rely on the sections loop.
-        // We need to map section ID to nav item index?
-        // Simpler: Just check if sidebar item's target section is "before" current active section.
-
-        const targetId = item.dataset.target;
-        const targetSection = document.getElementById(targetId);
-
-        if (targetSection) {
-            // Find index of this section in allSections
-            const sectionIndex = Array.from(sections).indexOf(targetSection);
-
-            if (sectionIndex < currentIndex) {
-                item.classList.add('completed');
-            } else if (sectionIndex === currentIndex) {
-                item.classList.add('active');
-            }
-        }
-    });
-
-    // Update Nav Dots logic REMOVED
-    /*
-    const navDots = document.querySelectorAll('.nav-dot');
-    navDots.forEach(dot => {
-        dot.classList.remove('active');
-        if (dot.dataset.target === sections[currentIndex].id) {
-            dot.classList.add('active');
-        }
-    });
-    */
 }
 
 function observeSections() {
@@ -325,113 +275,121 @@ function observeSections() {
 }
 
 // ============================================
-// Sidebar Navigation & Dots
+// Case 1: Reconciliation Challenge (Redesigned)
 // ============================================
-function initSidebar() {
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const targetId = item.dataset.target;
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                targetSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
-}
-
-// function initNavDots() { ... } // REMOVED
-
-// ============================================
-// Scroll Friction (Soft Lock)
-// ============================================
-function initScrollFriction() {
-    // Basic friction: Snap to section when scrolling stops?
-    // Or just prevent fast skimming.
-    // Let's implement a simple "Snap to center" for demo sections ensuring they are fully viewed.
-
-    let isScrolling = false;
-
-    // Using simple CSS Scroll Snap on the html/body would be cleaner if the layout supports it.
-    // Since we are doing JS friction:
-
-    /* 
-       Logic: When a demo section (class 'section') is > 50% visible, 
-       if user hasn't interacted, maybe show a hint.
-       The friction itself is hard to perfect in pure JS without overriding default scroll.
-       For now, we rely on the Sidebar + Snap-like behavior of scrollIntoView nav.
-    */
-
-    // We'll rely on CSS scroll-snap if possible, but let's add a listener 
-    // to detect "fast scrolling" and show a "Slow Down" hint if relevant?
-
-    // Actually, let's implement the "Friction Hint" visual
-    const hint = document.createElement('div');
-    hint.className = 'friction-hint';
-    hint.innerHTML = '✨ Scroll or Click to Interact';
-    document.body.appendChild(hint);
-
-    let hideHintTimeout;
-
-    window.addEventListener('scroll', () => {
-        if (!isScrolling) {
-            window.requestAnimationFrame(() => {
-                // If moving fast, show hint? No, that's annoying.
-                // If settling on a section, update UI.
-                isScrolling = false;
-            });
-            isScrolling = true;
-        }
-    });
-}
-
-// ============================================
-// Case 1: Contract Analysis (Redesigned)
-// ============================================
+let reconciliationTimer = null;
+let reconciliationSeconds = 0;
 
 function initSlider() {
-    // This function now initializes the contract demo
-    initContractDemo();
+    // This function now initializes the reconciliation demo instead of slider
+    initReconciliationDemo();
 }
 
-function initContractDemo() {
+function initReconciliationDemo() {
     const giveUpBtn = document.getElementById('giveUpBtn');
     const manualChallenge = document.getElementById('manualChallenge');
     const aiSolution = document.getElementById('aiSolution');
     const reconciliationResult = document.getElementById('reconciliationResult');
-    const comparisonHeader = document.getElementById('comparisonHeader');
+    const timerDisplay = document.getElementById('manualTimer');
+    const nextCase1Btn = document.getElementById('nextCase1Btn');
 
     if (!giveUpBtn) return;
 
-    // "Run AI Review" button click
+    // Timer removed - now focus on speed/accuracy comparison
+
+    // Give up button click
+    // Give up button click
     giveUpBtn.addEventListener('click', () => {
-        // Reveal the "AI vs Manual" stats header
-        if (comparisonHeader) {
-            comparisonHeader.classList.remove('hidden');
+        // Stop timer
+        if (typeof reconciliationTimer !== 'undefined') clearInterval(reconciliationTimer);
+
+        // Hide challenge, show AI solution
+        if (manualChallenge) manualChallenge.classList.add('hidden');
+        if (aiSolution) aiSolution.classList.remove('hidden');
+
+        // Animate comparison count
+        const countElZh = document.getElementById('comparisonCount');
+        const countElEn = document.getElementById('comparisonCountEn');
+        let count = 0;
+        const target = 2847;
+        const duration = 1500; // 1.5 seconds
+        const intervalTime = 30;
+        const steps = duration / intervalTime;
+        const increment = Math.ceil(target / steps);
+
+        const countInterval = setInterval(() => {
+            count += increment;
+            // Add some "jitter" for realism
+            count += Math.floor(Math.random() * 50) - 25;
+
+            if (count >= target) {
+                count = target;
+                clearInterval(countInterval);
+
+                // Update text one last time
+                if (countElZh) countElZh.textContent = count.toLocaleString();
+                if (countElEn) countElEn.textContent = count.toLocaleString();
+
+                // Show result after AI "finishes"
+                setTimeout(() => {
+                    if (aiSolution) aiSolution.classList.add('hidden');
+                    if (reconciliationResult) reconciliationResult.classList.remove('hidden');
+
+                    // Show next button
+                    const nextBtn = document.getElementById('nextCase1Btn');
+                    if (nextBtn) nextBtn.classList.remove('hidden');
+
+                    // Mark case as completed
+                    if (state && state.completedCases) {
+                        state.completedCases.add(1);
+                        updateProgress();
+                    }
+
+                    // Play success sound
+                    playSound('complete');
+                }, 500);
+            } else {
+                // Formatting
+                if (countElZh) countElZh.textContent = count.toLocaleString();
+                if (countElEn) countElEn.textContent = count.toLocaleString();
+            }
+        }, intervalTime);
+    });
+}
+
+function startReconciliationTimer(display) {
+    reconciliationSeconds = 0;
+    reconciliationTimer = setInterval(() => {
+        reconciliationSeconds++;
+        display.textContent = formatTime(reconciliationSeconds);
+
+        const lang = document.documentElement.getAttribute('data-lang') || 'zh';
+
+        // Update hint after certain time
+        if (reconciliationSeconds === 15) {
+            const hint = document.getElementById('challengeHint');
+            if (hint) {
+                if (lang === 'zh') {
+                    hint.innerHTML = '⏰ 已經 15 秒了...還沒找到嗎？要不要讓 AI 幫忙？';
+                } else {
+                    hint.innerHTML = '⏰ 15 seconds passed... Still looking? Want AI help?';
+                }
+                hint.style.background = 'rgba(255, 107, 107, 0.1)';
+            }
         }
 
-        // Switch to AI Phase
-        manualChallenge.classList.add('hidden');
-        aiSolution.classList.remove('hidden');
-
-        // Simulate Scanning (1.5s)
-        setTimeout(() => {
-            aiSolution.classList.add('hidden');
-            reconciliationResult.classList.remove('hidden');
-
-            // Play success sound
-            playSound('complete');
-
-            // Mark completion
-            state.completedCases.add(1);
-            updateProgress();
-
-            // Trigger confetti
-            const resultBox = document.querySelector('.discrepancy-found');
-            if (resultBox) createConfetti(resultBox);
-
-        }, 1500);
-    });
+        if (reconciliationSeconds === 30) {
+            const hint = document.getElementById('challengeHint');
+            if (hint) {
+                if (lang === 'zh') {
+                    hint.innerHTML = '😰 30 秒了！真實情況是 2,847 筆交易...這樣對一個月要花 40 小時！';
+                } else {
+                    hint.innerHTML = '😰 30 seconds! Real case: 2,847 records... That takes 40 hours/month!';
+                }
+                hint.style.color = 'var(--danger)';
+            }
+        }
+    }, 1000);
 }
 
 function formatTime(seconds) {
@@ -520,15 +478,19 @@ function initMaintenanceDemo() {
         const lang = document.documentElement.getAttribute('data-lang') || 'zh';
         searchBtn.innerHTML = lang === 'zh' ? '搜尋中...' : 'Searching...';
 
+        const currentLang = document.documentElement.getAttribute('data-lang') || 'zh';
+
         setTimeout(() => {
             result.classList.remove('hidden');
             result.style.animation = 'fadeInUp 0.5s ease';
+
+            // Set content with correct visibility classes initially
             searchBtn.innerHTML = `
-                <span class="lang-zh">搜尋完成</span>
-                <span class="lang-en">Search Complete</span>
+                <span class="lang-zh${currentLang === 'zh' ? '' : ' hidden'}">搜尋完成</span>
+                <span class="lang-en${currentLang === 'en' ? '' : ' hidden'}">Search Complete</span>
             `;
 
-            state.completedCases.add(3);
+            state.completedCases.add(2);
             updateProgress();
             playSound('ping');
         }, 800);
@@ -557,6 +519,10 @@ function showRecognitionLabels(resultContainer, callback) {
     const dataValues = resultContainer.querySelectorAll('.data-value');
     const lang = document.documentElement.getAttribute('data-lang') || 'zh';
 
+    // Clear any previous glow effects
+    const existingGlows = resultContainer.querySelectorAll('.svg-text-glow');
+    existingGlows.forEach(el => el.classList.remove('svg-text-glow'));
+
     // Hide all recognition boxes initially
     boxes.forEach(box => {
         box.style.opacity = '0';
@@ -573,6 +539,21 @@ function showRecognitionLabels(resultContainer, callback) {
             box.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
             box.style.opacity = '1';
             box.style.transform = 'scale(1)';
+
+            // Trigger SVG Text Highlighting
+            const targetId = box.dataset.target;
+            if (targetId) {
+                if (targetId === 'invoice-item') {
+                    // Highlight logic for multiple items
+                    const items = resultContainer.querySelectorAll('.invoice-item');
+                    items.forEach(item => item.classList.add('svg-text-glow'));
+                } else {
+                    // Highlight logic for specific ID
+                    const targetEl = resultContainer.querySelector(`#${targetId}`);
+                    if (targetEl) targetEl.classList.add('svg-text-glow');
+                }
+            }
+
             playSound('ping');
         }, LABEL_DELAY + (i * LABEL_STAGGER));
     });
@@ -694,8 +675,11 @@ function initQualityDemo() {
         setTimeout(() => {
             result.classList.remove('hidden');
             result.style.animation = 'fadeInUp 0.5s ease';
-            const lang = document.documentElement.getAttribute('data-lang') || 'zh';
-            startBtn.textContent = lang === 'zh' ? '檢測完成 ✓' : 'Complete ✓';
+            const currentLang = document.documentElement.getAttribute('data-lang') || 'zh';
+            startBtn.innerHTML = `
+                <span class="lang-zh${currentLang === 'zh' ? '' : ' hidden'}">檢測完成 ✓</span>
+                <span class="lang-en${currentLang === 'en' ? '' : ' hidden'}">Complete ✓</span>
+            `;
 
             state.completedCases.add(5);
             updateProgress();
@@ -851,9 +835,9 @@ Support`
                 }
                 hasGenerated = true;
                 isGenerating = false;
-                state.completedCases.add(9);
+                state.completedCases.add(6);
                 updateProgress();
-            });
+            }, 15);
 
         }, delay);
     }
@@ -918,14 +902,11 @@ const BENCHMARKS = {
     // Time savings per case type (hours saved per month)
     caseSavings: {
         1: { hours: 40, name: 'Reconciliation' },      // 對帳
-        2: { hours: 20, name: 'Resume Screening' },    // 履歷篩選
-        3: { hours: 8, name: 'Maintenance Search' },   // 維修搜尋
-        4: { hours: 30, name: 'Office Documents' },    // 辦公文書
-        5: { hours: 15, name: 'Sales Email' },         // 業務郵件
-        6: { hours: 10, name: 'Meeting Summary' },     // 會議紀錄
-        7: { hours: 25, name: 'HR Content' },          // HR 文案
-        8: { hours: 35, name: 'Invoice OCR' },         // 發票辨識
-        9: { hours: 20, name: 'Customer Service' }     // 客服回信
+        2: { hours: 8, name: 'Maintenance Search' },   // 維修搜尋
+        3: { hours: 30, name: 'Office Documents' },    // 辦公文書
+        4: { hours: 15, name: 'Sales Email' },         // 業務郵件
+        5: { hours: 15, name: 'HR Content' },          // HR 文案
+        6: { hours: 20, name: 'Customer Service' }     // 客服回信
     },
     // Cost calculation
     hourlyRate: 600,           // NT$ per hour (average office worker)
@@ -1040,9 +1021,13 @@ function initOfficeDemo() {
         setTimeout(() => {
             result.classList.remove('hidden');
             result.style.animation = 'fadeInUp 0.5s ease';
-            btn.innerHTML = lang === 'zh' ? '完成 ✓' : 'Done ✓';
+            const currentLang = document.documentElement.getAttribute('data-lang') || 'zh';
+            btn.innerHTML = `
+                <span class="lang-zh${currentLang === 'zh' ? '' : ' hidden'}">完成 ✓</span>
+                <span class="lang-en${currentLang === 'en' ? '' : ' hidden'}">Done ✓</span>
+            `;
 
-            state.completedCases.add(7);
+            state.completedCases.add(3);
             updateProgress();
             playSound('ping');
         }, 1500);
@@ -1075,11 +1060,12 @@ function initSalesDemo() {
             }
 
             typewriterEffect(draftContent, draft, () => {
+                const currentLang = document.documentElement.getAttribute('data-lang') || 'zh';
                 btn.innerHTML = `
-                    <span class="lang-zh">完成 ✓</span>
-                    <span class="lang-en">Done ✓</span>
+                    <span class="lang-zh${currentLang === 'zh' ? '' : ' hidden'}">完成 ✓</span>
+                    <span class="lang-en${currentLang === 'en' ? '' : ' hidden'}">Done ✓</span>
                 `;
-                state.completedCases.add(8);
+                state.completedCases.add(4);
                 updateProgress();
             });
         }, 1000);
@@ -1103,9 +1089,10 @@ function initMeetingDemo() {
         setTimeout(() => {
             result.classList.remove('hidden');
             result.style.animation = 'fadeInUp 0.5s ease';
+            const currentLang = document.documentElement.getAttribute('data-lang') || 'zh';
             btn.innerHTML = `
-                <span class="lang-zh">完成 ✓</span>
-                <span class="lang-en">Done ✓</span>
+                <span class="lang-zh${currentLang === 'zh' ? '' : ' hidden'}">完成 ✓</span>
+                <span class="lang-en${currentLang === 'en' ? '' : ' hidden'}">Done ✓</span>
             `;
 
             state.completedCases.add(9);
@@ -1125,11 +1112,10 @@ function initHRGenDemo() {
     const taskBtns = document.querySelectorAll('#caseHRGen .task-btn');
     const input = document.getElementById('hrInput');
 
-    let currentTask = 'jd';
+    let currentTask = 'activity';
 
     // Default values for each task type (pre-filled, no user input needed)
     const defaultValues = {
-        jd: { zh: '資深前端工程師', en: 'Senior Frontend Developer' },
         activity: { zh: '技術交流會', en: 'Tech Meetup' },
         notice: { zh: '新人報到公告', en: 'New Employee Welcome' }
     };
@@ -1155,10 +1141,11 @@ function initHRGenDemo() {
             content.textContent = '';
             btn.disabled = false;
             const lang = document.documentElement.getAttribute('data-lang') || 'zh';
+            const currentLang = document.documentElement.getAttribute('data-lang') || 'zh';
             btn.innerHTML = `
                 <span class="btn-icon">✨</span>
-                <span class="lang-zh">AI 自動生成</span>
-                <span class="lang-en">AI Generate</span>
+                <span class="lang-zh${currentLang === 'zh' ? '' : ' hidden'}">AI 自動生成</span>
+                <span class="lang-en${currentLang === 'en' ? '' : ' hidden'}">AI Generate</span>
             `;
         });
     });
@@ -1180,11 +1167,17 @@ function initHRGenDemo() {
             result.classList.remove('hidden');
             let text = '';
 
+            // Auto-translate default input if needed
+            if (defaultValues[currentTask]) {
+                if (lang === 'en' && input.value === defaultValues[currentTask].zh) {
+                    input.value = defaultValues[currentTask].en;
+                } else if (lang === 'zh' && input.value === defaultValues[currentTask].en) {
+                    input.value = defaultValues[currentTask].zh;
+                }
+            }
+
             // Content based on task and language
-            if (currentTask === 'jd') {
-                if (lang === 'zh') text = `【職位：${input.value}】\n\n職責：\n1. 負責核心系統架構設計\n2. 帶領團隊進行代碼審查\n\n要求：\n1. 5年以上經驗\n2. 精通 React/Node.js`;
-                else text = `[Role: ${input.value}]\n\nResponsibilities:\n1. Core architecture design\n2. Lead code reviews\n\nRequirements:\n1. 5+ Years Experience\n2. Expert in React/Node.js`;
-            } else if (currentTask === 'activity') {
+            if (currentTask === 'activity') {
                 if (lang === 'zh') text = `【活動提案：${input.value}】\n\n目標：促進團隊技術交流\n形式：下午茶 + Lightning Talk\n預算：$500/人`;
                 else text = `[Event: ${input.value}]\n\nGoal: Team technical sharing\nFormat: Tea time + Lightning Talk\nBudget: $20/person`;
             } else {
@@ -1193,10 +1186,14 @@ function initHRGenDemo() {
             }
 
             typewriterEffect(content, text, () => {
-                btn.innerHTML = lang === 'zh' ? '完成 ✓' : 'Done ✓';
-                state.completedCases.add(7); // Renumbered from 10 to 7
+                const currentLang = document.documentElement.getAttribute('data-lang') || 'zh';
+                btn.innerHTML = `
+                    <span class="lang-zh${currentLang === 'zh' ? '' : ' hidden'}">完成 ✓</span>
+                    <span class="lang-en${currentLang === 'en' ? '' : ' hidden'}">Done ✓</span>
+                `;
+                state.completedCases.add(5);
                 updateProgress();
-            });
+            }, 10);
         }, 1000);
     });
 }
@@ -1204,7 +1201,7 @@ function initHRGenDemo() {
 // ============================================
 // Utility Functions
 // ============================================
-function typewriterEffect(element, text, callback, speed = 5) {
+function typewriterEffect(element, text, callback, speed = 30) {
     element.textContent = '';
     let i = 0;
 
@@ -1313,81 +1310,102 @@ function resetAllDemos() {
     state.currentCase = 0;
     updateProgress();
 
-    // Reset all demo states
-    document.querySelectorAll('.hidden').forEach(el => {
-        // Don't unhide elements that should start hidden
-    });
+    const lang = document.documentElement.getAttribute('data-lang') || 'zh';
 
-    // Reset slider
-    const slider = document.getElementById('slider1');
-    if (slider) {
-        slider.style.left = '50%';
-        const track = slider.closest('.slider-track');
-        track.querySelector('.left-side').style.flex = '1';
-        track.querySelector('.right-side').style.flex = '1';
+    // 1. Reset Reconciliation Demo (Case 1)
+    const manualChallenge = document.getElementById('manualChallenge');
+    const aiSolution = document.getElementById('aiSolution');
+    const reconciliationResult = document.getElementById('reconciliationResult');
+    const nextCase1Btn = document.getElementById('nextCase1Btn');
+
+    if (manualChallenge) manualChallenge.classList.remove('hidden');
+    if (aiSolution) aiSolution.classList.add('hidden');
+    if (reconciliationResult) reconciliationResult.classList.add('hidden');
+    if (nextCase1Btn) nextCase1Btn.classList.add('hidden');
+
+    // 2. Reset Maintenance Demo (Case 3)
+    const searchBtn = document.getElementById('searchSolutionBtn');
+    const knowledgeResult = document.getElementById('knowledgeResult');
+    if (searchBtn) {
+        searchBtn.disabled = false;
+        searchBtn.innerHTML = lang === 'zh' ? '搜尋方案' : 'Search Solution';
+    }
+    if (knowledgeResult) knowledgeResult.classList.add('hidden');
+
+    // 3. Reset Office Demo (Case Office)
+    const processDocBtn = document.getElementById('processDocBtn');
+    const docResult = document.getElementById('docResult');
+    if (processDocBtn) {
+        processDocBtn.disabled = false;
+        processDocBtn.innerHTML = `
+            <span class="btn-icon">⚡</span>
+            <span class="lang-zh${lang === 'zh' ? '' : ' hidden'}">AI 自動分類與摘要</span>
+            <span class="lang-en${lang === 'en' ? '' : ' hidden'}">AI Classify & Summarize</span>
+        `;
+    }
+    if (docResult) docResult.classList.add('hidden');
+
+    // 4. Reset Sales Demo (Case Sales)
+    const analyzeSalesBtn = document.getElementById('analyzeSalesBtn');
+    const salesResult = document.getElementById('salesResult');
+    const salesDraft = document.getElementById('salesDraft');
+    if (analyzeSalesBtn) {
+        analyzeSalesBtn.disabled = false;
+        analyzeSalesBtn.innerHTML = `
+            <span class="btn-icon">🧠</span>
+            <span class="lang-zh${lang === 'zh' ? '' : ' hidden'}">AI 分析與擬稿</span>
+            <span class="lang-en${lang === 'en' ? '' : ' hidden'}">Analyze & Draft</span>
+        `;
+    }
+    if (salesResult) salesResult.classList.add('hidden');
+    if (salesDraft) salesDraft.innerHTML = '';
+
+    // 5. Reset HR Gen Demo (Case HRGen)
+    const generateHRBtn = document.getElementById('generateHRBtn');
+    const hrResult = document.getElementById('hrResult');
+    const hrContent = document.getElementById('hrContent');
+    const hrInput = document.getElementById('hrInput');
+    if (generateHRBtn) {
+        generateHRBtn.disabled = false;
+        generateHRBtn.innerHTML = `
+            <span class="btn-icon">✨</span>
+            <span class="lang-zh${lang === 'zh' ? '' : ' hidden'}">AI 自動生成</span>
+            <span class="lang-en${lang === 'en' ? '' : ' hidden'}">AI Generate</span>
+        `;
+    }
+    if (hrResult) hrResult.classList.add('hidden');
+    if (hrContent) hrContent.innerHTML = '';
+    if (hrInput) {
+        hrInput.value = lang === 'zh' ? hrInput.dataset.valueZh : hrInput.dataset.valueEn;
     }
 
-    // Reset savings
+    // 6. Reset Customer Service Demo (Case 6)
+    const generateReplyBtn = document.getElementById('generateReply');
+    const replyDisplay = document.getElementById('replyDisplay');
+    const replyContent = document.getElementById('replyContent');
+    if (generateReplyBtn) {
+        generateReplyBtn.disabled = false;
+        generateReplyBtn.innerHTML = `
+            <span class="btn-icon">🤖</span>
+            <span class="lang-zh${lang === 'zh' ? '' : ' hidden'}">AI 助理生成回覆</span>
+            <span class="lang-en${lang === 'en' ? '' : ' hidden'}">AI Generate Reply</span>
+        `;
+    }
+    if (replyDisplay) replyDisplay.classList.add('hidden');
+    if (replyContent) replyContent.innerHTML = '';
+
+    // Global selector cleanup for any remaining visible elements
     document.querySelectorAll('.savings-reveal').forEach(el => {
         el.classList.remove('visible');
     });
 
-    // Reset resume demo
-    const resumeUpload = document.getElementById('resumeUpload');
-    const resumeResult = document.getElementById('resumeResult');
-    if (resumeUpload && resumeResult) {
-        resumeUpload.classList.remove('hidden');
-        resumeResult.classList.add('hidden');
-    }
-
-    // Reset maintenance demo
-    const machineIcon = document.getElementById('machineIcon');
-    if (machineIcon) {
-        machineIcon.classList.remove('shaking');
-        machineIcon.textContent = '⚙️';
-    }
-    const machineStatus = document.querySelector('.machine-status');
-    if (machineStatus) {
-        machineStatus.textContent = '設備運行中';
-        machineStatus.className = 'machine-status normal';
-    }
-
-    // Reset buttons
-    document.querySelectorAll('button').forEach(btn => {
-        btn.disabled = false;
-        btn.style.opacity = '';
+    // Reset all buttons state
+    document.querySelectorAll('.action-btn, .search-btn, .next-case-btn').forEach(btn => {
+        if (btn.id !== 'nextCase1Btn') { // keep nextCase1Btn hidden
+            btn.disabled = false;
+            btn.style.opacity = '';
+        }
     });
-
-    // Reset invoice demo
-    const invoiceDropZone = document.getElementById('invoiceDropZone');
-    const invoiceResult = document.getElementById('invoiceResult');
-    if (invoiceDropZone && invoiceResult) {
-        invoiceDropZone.parentElement.classList.remove('hidden');
-        invoiceResult.classList.add('hidden');
-    }
-
-    // Reset quality demo
-    document.querySelectorAll('.product-item').forEach(item => {
-        item.classList.remove('scanned', 'defect-found');
-        item.querySelector('.defect-marker')?.classList.add('hidden');
-    });
-    const inspectionResult = document.getElementById('inspectionResult');
-    inspectionResult?.classList.add('hidden');
-
-    // Reset service demo
-    const replyDisplay = document.getElementById('replyDisplay');
-    replyDisplay?.classList.add('hidden');
-
-    // Reset report
-    const reportOutput = document.getElementById('reportOutput');
-    const aiAssistant = document.getElementById('aiAssistant');
-    const faultBtn = document.getElementById('triggerFault');
-    reportOutput?.classList.add('hidden');
-    aiAssistant?.classList.add('hidden');
-    if (faultBtn) {
-        faultBtn.disabled = false;
-        faultBtn.style.opacity = '';
-    }
 }
 
 // ============================================
