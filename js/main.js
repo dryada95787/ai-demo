@@ -18,7 +18,6 @@ const state = {
 const elements = {
     progressBar: document.querySelector('.progress-fill'),
     currentCaseDisplay: document.getElementById('currentCase'),
-    startBtn: document.getElementById('startBtn'),
     restartBtn: document.getElementById('restartDemo')
 };
 
@@ -42,6 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initWhyAINow();
     initROIDashboard();
     initHITLProtocol();
+    // initNavDots(); // New Nav Dots REMOVED
+    // initSidebar(); // Sidebar REMOVED
+    initScrollFriction();
 
     // Observe sections for progress tracking
     observeSections();
@@ -219,9 +221,8 @@ function initHITLProtocol() {
 // ============================================
 function initNavigation() {
     // Start button
-    elements.startBtn?.addEventListener('click', () => {
-        document.getElementById('whyAINow')?.scrollIntoView({ behavior: 'smooth' });
-    });
+    // Start button removed
+
 
     // Next case buttons
     document.querySelectorAll('.next-case-btn').forEach(btn => {
@@ -258,6 +259,45 @@ function updateProgress() {
     const progress = ((currentIndex + 1) / total) * 100;
     elements.progressBar.style.width = `${progress}%`;
     elements.currentCaseDisplay.textContent = currentIndex + 1;
+
+    // Update Sidebar Active State
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach((item, index) => {
+        item.classList.remove('active', 'completed');
+
+        // Match by data-target vs sections
+        // But sections list might include things not in sidebar, or vice versa.
+        // Safer to find index in navItems.
+
+        // Let's rely on the sections loop.
+        // We need to map section ID to nav item index?
+        // Simpler: Just check if sidebar item's target section is "before" current active section.
+
+        const targetId = item.dataset.target;
+        const targetSection = document.getElementById(targetId);
+
+        if (targetSection) {
+            // Find index of this section in allSections
+            const sectionIndex = Array.from(sections).indexOf(targetSection);
+
+            if (sectionIndex < currentIndex) {
+                item.classList.add('completed');
+            } else if (sectionIndex === currentIndex) {
+                item.classList.add('active');
+            }
+        }
+    });
+
+    // Update Nav Dots logic REMOVED
+    /*
+    const navDots = document.querySelectorAll('.nav-dot');
+    navDots.forEach(dot => {
+        dot.classList.remove('active');
+        if (dot.dataset.target === sections[currentIndex].id) {
+            dot.classList.add('active');
+        }
+    });
+    */
 }
 
 function observeSections() {
@@ -285,116 +325,113 @@ function observeSections() {
 }
 
 // ============================================
-// Case 1: Reconciliation Challenge (Redesigned)
+// Sidebar Navigation & Dots
 // ============================================
-let reconciliationTimer = null;
-let reconciliationSeconds = 0;
-
-function initSlider() {
-    // This function now initializes the reconciliation demo instead of slider
-    initReconciliationDemo();
+function initSidebar() {
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const targetId = item.dataset.target;
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
 }
 
-function initReconciliationDemo() {
+// function initNavDots() { ... } // REMOVED
+
+// ============================================
+// Scroll Friction (Soft Lock)
+// ============================================
+function initScrollFriction() {
+    // Basic friction: Snap to section when scrolling stops?
+    // Or just prevent fast skimming.
+    // Let's implement a simple "Snap to center" for demo sections ensuring they are fully viewed.
+
+    let isScrolling = false;
+
+    // Using simple CSS Scroll Snap on the html/body would be cleaner if the layout supports it.
+    // Since we are doing JS friction:
+
+    /* 
+       Logic: When a demo section (class 'section') is > 50% visible, 
+       if user hasn't interacted, maybe show a hint.
+       The friction itself is hard to perfect in pure JS without overriding default scroll.
+       For now, we rely on the Sidebar + Snap-like behavior of scrollIntoView nav.
+    */
+
+    // We'll rely on CSS scroll-snap if possible, but let's add a listener 
+    // to detect "fast scrolling" and show a "Slow Down" hint if relevant?
+
+    // Actually, let's implement the "Friction Hint" visual
+    const hint = document.createElement('div');
+    hint.className = 'friction-hint';
+    hint.innerHTML = '✨ Scroll or Click to Interact';
+    document.body.appendChild(hint);
+
+    let hideHintTimeout;
+
+    window.addEventListener('scroll', () => {
+        if (!isScrolling) {
+            window.requestAnimationFrame(() => {
+                // If moving fast, show hint? No, that's annoying.
+                // If settling on a section, update UI.
+                isScrolling = false;
+            });
+            isScrolling = true;
+        }
+    });
+}
+
+// ============================================
+// Case 1: Contract Analysis (Redesigned)
+// ============================================
+
+function initSlider() {
+    // This function now initializes the contract demo
+    initContractDemo();
+}
+
+function initContractDemo() {
     const giveUpBtn = document.getElementById('giveUpBtn');
     const manualChallenge = document.getElementById('manualChallenge');
     const aiSolution = document.getElementById('aiSolution');
     const reconciliationResult = document.getElementById('reconciliationResult');
-    const timerDisplay = document.getElementById('manualTimer');
-    const nextCase1Btn = document.getElementById('nextCase1Btn');
+    const comparisonHeader = document.getElementById('comparisonHeader');
 
     if (!giveUpBtn) return;
 
-    // Timer removed - now focus on speed/accuracy comparison
-
-    // Give up button click
+    // "Run AI Review" button click
     giveUpBtn.addEventListener('click', () => {
-        // Show the comparison header (AI stats) which was hidden
-        const comparisonHeader = document.getElementById('comparisonHeader');
+        // Reveal the "AI vs Manual" stats header
         if (comparisonHeader) {
             comparisonHeader.classList.remove('hidden');
-            // Move it to the result section or ensure it's visible where effective
-            // Actually, if manualChallenge is hidden, this header inside it will be hidden too.
-            // We need to move it or unhide it and keep it visible.
-            // Let's modify the HTML structure in the next step to move it out or clone it.
-            // For now, let's just make sure we have the logic ready, but I need to see the HTML for result first.
         }
-        // Stop timer
-        clearInterval(reconciliationTimer);
-        const finalTime = formatTime(reconciliationSeconds);
 
-        // Hide challenge, show AI solution
+        // Switch to AI Phase
         manualChallenge.classList.add('hidden');
         aiSolution.classList.remove('hidden');
 
-        // Animate comparison count
-        const comparisonCount = document.getElementById('comparisonCount');
-        const comparisonCountEn = document.getElementById('comparisonCountEn');
-        let count = 0;
-        const countInterval = setInterval(() => {
-            count += Math.floor(Math.random() * 50) + 20;
-            if (count >= 2847) {
-                count = 2847;
-                clearInterval(countInterval);
+        // Simulate Scanning (1.5s)
+        setTimeout(() => {
+            aiSolution.classList.add('hidden');
+            reconciliationResult.classList.remove('hidden');
 
-                // Show result after AI "finishes"
-                setTimeout(() => {
-                    aiSolution.classList.add('hidden');
-                    reconciliationResult.classList.remove('hidden');
+            // Play success sound
+            playSound('complete');
 
-                    // Update user's time in result
-                    document.getElementById('yourTimeResult').textContent = finalTime;
+            // Mark completion
+            state.completedCases.add(1);
+            updateProgress();
 
-                    // Show next button
-                    nextCase1Btn?.classList.remove('hidden');
+            // Trigger confetti
+            const resultBox = document.querySelector('.discrepancy-found');
+            if (resultBox) createConfetti(resultBox);
 
-                    // Mark case as completed
-                    state.completedCases.add(1);
-                    updateProgress();
-
-                    // Play success sound
-                    playSound('complete');
-                }, 800);
-            }
-            if (comparisonCount) comparisonCount.textContent = count.toLocaleString();
-            if (comparisonCountEn) comparisonCountEn.textContent = count.toLocaleString();
-        }, 50);
+        }, 1500);
     });
-}
-
-function startReconciliationTimer(display) {
-    reconciliationSeconds = 0;
-    reconciliationTimer = setInterval(() => {
-        reconciliationSeconds++;
-        display.textContent = formatTime(reconciliationSeconds);
-
-        const lang = document.documentElement.getAttribute('data-lang') || 'zh';
-
-        // Update hint after certain time
-        if (reconciliationSeconds === 15) {
-            const hint = document.getElementById('challengeHint');
-            if (hint) {
-                if (lang === 'zh') {
-                    hint.innerHTML = '⏰ 已經 15 秒了...還沒找到嗎？要不要讓 AI 幫忙？';
-                } else {
-                    hint.innerHTML = '⏰ 15 seconds passed... Still looking? Want AI help?';
-                }
-                hint.style.background = 'rgba(255, 107, 107, 0.1)';
-            }
-        }
-
-        if (reconciliationSeconds === 30) {
-            const hint = document.getElementById('challengeHint');
-            if (hint) {
-                if (lang === 'zh') {
-                    hint.innerHTML = '😰 30 秒了！真實情況是 2,847 筆交易...這樣對一個月要花 40 小時！';
-                } else {
-                    hint.innerHTML = '😰 30 seconds! Real case: 2,847 records... That takes 40 hours/month!';
-                }
-                hint.style.color = 'var(--danger)';
-            }
-        }
-    }, 1000);
 }
 
 function formatTime(seconds) {

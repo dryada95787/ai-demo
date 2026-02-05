@@ -87,7 +87,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
+    overflow-x: hidden;
 }
 
 body {
@@ -145,9 +145,133 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--space-xl) var(--space-lg);
-    scroll-snap-align: start;
+    /* Removed large padding to use space better without sidebar */
+    padding: var(--space-xl) var(--space-md);
     position: relative;
+    height: auto;
+    width: 100%;
+    /* Ensure full width */
+    max-width: 100%;
+}
+
+
+/* [NEW ADDITION] Split Layout for Desktop */
+@media (min-width: 1024px) {
+    .split-layout {
+        display: grid;
+        grid-template-columns: 35% 60%;
+        /* Left Info : Right Demo */
+        gap: 5%;
+        align-items: center;
+        max-width: 1400px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .case-info-panel {
+        text-align: left;
+        padding-right: var(--space-md);
+        /* Ensure it doesn't get too wide on very large screens */
+        max-width: 600px;
+    }
+
+    /* Adjust headers for split view */
+    .case-header {
+        align-items: flex-start;
+        /* Align left */
+        flex-direction: row;
+        gap: var(--space-md);
+    }
+
+    .case-icon {
+        font-size: 48px;
+        /* Smaller icon */
+        margin-bottom: 0;
+    }
+
+    .case-title {
+        text-align: left;
+        font-size: 42px;
+    }
+
+    .case-pain {
+        text-align: left;
+        font-size: 18px;
+        margin-bottom: var(--space-lg);
+    }
+
+    /* Ensure demo container takes full height if needed */
+    .demo-container {
+        margin-bottom: 0;
+        height: 100%;
+        min-height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* Hide next button in split view as scrolling is continuous */
+    .split-layout .next-case-btn {
+        display: none;
+    }
+}
+
+/* [FIX 1] Remove Sidebar/Nav Dots */
+/* DELETE or COMMENT OUT any .nav-dots, .nav-dot styles */
+.nav-dots,
+.nav-dot {
+    display: none !important;
+}
+
+/* [FIX 3] Case 1 Table Overflow Fix */
+.reconciliation-challenge table {
+    table-layout: fixed;
+    /* Crucial: Forces columns to respect width */
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reconciliation-challenge th,
+.reconciliation-challenge td {
+    word-wrap: break-word;
+    /* Break long words */
+    overflow-wrap: break-word;
+    /* Modern standard */
+    white-space: normal;
+    /* Allow wrapping */
+    vertical-align: top;
+    /* Align text to top for better reading */
+    padding: 8px;
+    /* Ensure breathing room */
+}
+
+/* [MODIFICATION 3] Enhance Tables for Cost Analysis */
+.cost-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--space-md);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.cost-table td,
+.cost-table th {
+    padding: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+}
+
+.cost-table th {
+    background: rgba(0, 240, 255, 0.1);
+    color: var(--accent);
+}
+
+.cost-value {
+    font-family: var(--font-data);
+    color: var(--success);
+    font-weight: 700;
+    text-align: right;
 }
 
 /* ==== Hero Section ==== */
@@ -193,6 +317,7 @@ body {
     margin-bottom: var(--space-lg);
     text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     background: linear-gradient(to right, #FFFFFF, #94A3B8);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -329,6 +454,7 @@ body {
     margin-bottom: var(--space-md);
     color: var(--text-primary);
     background: linear-gradient(to bottom, #fff, #cbd5e1);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -344,6 +470,187 @@ body {
     border-radius: var(--radius-lg);
     border: var(--glass-border);
     backdrop-filter: blur(10px);
+}
+
+/* [NEW] ROI Data Section Styles */
+.roi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.data-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.data-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.data-number {
+    font-family: var(--font-data);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: var(--space-xs);
+    display: block;
+}
+
+.data-label {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.source-citation {
+    margin-top: var(--space-md);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    opacity: 0.7;
+    text-align: right;
+    width: 100%;
+    display: block;
+}
+
+/* Fix Comparison Table Responsiveness */
+.comparison-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.comparison-table td {
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+/* ==== Contract Viewer (Case 1) ==== */
+.contract-demo .reconciliation-challenge {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contract-viewer {
+    background: #fdfbf7;
+    /* Paper color */
+    color: #1a1a1a;
+    padding: 40px;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    height: 400px;
+    overflow-y: scroll;
+    position: relative;
+    font-family: 'Times New Roman', serif;
+    margin-bottom: 2rem;
+    border: 1px solid #d1d5db;
+}
+
+.contract-viewer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.contract-viewer::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.contract-header {
+    text-align: center;
+    border-bottom: 2px solid #000;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.contract-header h3 {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.contract-meta {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.contract-body p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: justify;
+}
+
+.contract-body strong {
+    color: #000;
+}
+
+.contract-filler {
+    opacity: 0.5;
+}
+
+/* Missing Clause Target (Hidden initially) */
+.missing-clause-target {
+    border: 2px dashed transparent;
+    transition: all 0.3s ease;
+    padding: 5px;
+}
+
+/* Highlight style when AI finds it */
+.missing-clause-target.highlight-risk {
+    border-color: var(--danger);
+    background-color: rgba(255, 46, 99, 0.1);
+    position: relative;
+}
+
+.missing-clause-target.highlight-risk::after {
+    content: 'RISK DETECTED';
+    position: absolute;
+    right: 0;
+    top: -10px;
+    background: var(--danger);
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    font-family: var(--font-display);
+    font-weight: bold;
+}
+
+.scan-animation.contract-scan .scan-bar {
+    width: 100%;
+    height: 4px;
+    background: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
+    animation: textScan 2s infinite linear;
+    top: 0;
+}
+
+@keyframes textScan {
+    0% {
+        top: 0%;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
 }
 
 /* ==== Slider Component ==== */
@@ -401,10 +708,38 @@ body {
 
 .time-value {
     font-family: var(--font-data);
-    font-size: var(--data-size);
+    /* Larger size for the number part */
+    font-size: clamp(3rem, 6vw, 4.5rem);
     font-weight: 800;
     text-shadow: 0 0 20px currentColor;
+    line-height: 0.9;
+    white-space: normal;
+    /* Allow wrapping for BR */
+    display: block;
+    width: 100%;
 }
+
+.time-unit-small {
+    font-size: 0.35em;
+    /* Much smaller relative to the number */
+    display: block;
+    /* Force new line behavior if BR fails/helps spacing */
+    white-space: nowrap;
+    margin-top: 0.1em;
+    opacity: 0.9;
+    font-weight: 700;
+}
+
+
+/* Responsive adjustment for time values */
+/* Responsive adjustment for time values - REMOVED to force single line */
+@media (max-width: 1200px) {
+    .time-value {
+        /* Keep font size dynamic from base rule */
+        white-space: nowrap;
+    }
+}
+
 
 .time-unit {
     font-size: 24px;
@@ -581,6 +916,7 @@ body {
     font-size: 56px;
     font-weight: 800;
     background: linear-gradient(to bottom, #fff, var(--success-light));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.3));
@@ -811,13 +1147,30 @@ body {
     margin-bottom: var(--space-lg);
 }
 
+/* [FIX 4] Button Ratio & Text Fix (Case 4-8) */
 .fault-btn,
 .ai-btn,
-.action-btn {
+.action-btn,
+.demo-btn,
+button[class*="btn"] {
+    height: auto !important;
+    /* Remove fixed height */
+    min-height: 44px;
+    /* Touch-friendly minimum */
+    padding: 12px 24px !important;
+    /* Use padding to define size */
+    line-height: 1.4 !important;
+    /* Improve text readability */
+    white-space: normal !important;
+    /* Allow text to wrap if really long */
+    max-width: 100%;
+    /* Prevent escaping container */
     display: inline-flex;
+    /* Use flex for centering */
     align-items: center;
+    justify-content: center;
+    text-align: center;
     gap: var(--space-sm);
-    padding: var(--space-md) var(--space-xl);
     font-size: 18px;
     font-weight: 600;
     border: none;
@@ -849,6 +1202,12 @@ body {
 .action-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+}
+
+/* [FIX] Add spacing for buttons inside demo containers */
+.demo-container .action-btn {
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-lg);
 }
 
 .fault-icon,
@@ -3362,7 +3721,9 @@ button,
 
 .reply-content {
     padding: 24px;
-}/* ==== Global Language Visibility Rules ==== */
+}
+
+/* ==== Global Language Visibility Rules ==== */
 /* Ensure correct language is shown/hidden based on html attribute */
 html[data-lang="en"] .lang-zh {
     display: none !important;
@@ -3375,4 +3736,231 @@ html[data-lang="zh"] .lang-en {
 /* Ensure hidden class still works if manually applied */
 .hidden {
     display: none !important;
+}
+
+/* ==== Sidebar Navigation ==== */
+.sidebar-nav {
+    position: fixed;
+    right: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    padding-right: 20px;
+    /* Space for hover expansion */
+}
+
+/* Vertical Line connecting dots */
+.nav-list::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    right: 5px;
+    /* Aligned with dots */
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 0;
+    border-radius: 2px;
+}
+
+.nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.nav-dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: all var(--transition-normal);
+    border: 2px solid transparent;
+    /* Prepare for border on active */
+    margin-left: 12px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.nav-label {
+    position: absolute;
+    right: 30px;
+    background: rgba(15, 23, 42, 0.9);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--text-primary);
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all var(--transition-normal);
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    box-shadow: var(--shadow-md);
+}
+
+.nav-item:hover .nav-dot {
+    background: var(--text-secondary);
+    transform: scale(1.2);
+}
+
+.nav-item:hover .nav-label {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.nav-item.active .nav-dot {
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    transform: scale(1.3);
+    border-color: rgba(15, 23, 42, 0.9);
+}
+
+.nav-item.active .nav-label {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.nav-item.completed .nav-dot {
+    background: var(--success);
+    /* Or another color indicating done */
+    opacity: 0.8;
+}
+
+/* ==== Cost Comparison Table ==== */
+.cost-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin-top: var(--space-lg);
+}
+
+.cost-table th {
+    background: rgba(30, 41, 59, 0.8);
+    padding: var(--space-md);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid var(--accent);
+    color: var(--text-primary);
+    vertical-align: top;
+}
+
+.cost-table th:first-child {
+    border-top-left-radius: var(--radius-lg);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cost-table th:last-child {
+    border-top-right-radius: var(--radius-lg);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sub-header {
+    display: block;
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    font-weight: 400;
+}
+
+.cost-table td {
+    padding: var(--space-md);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    vertical-align: top;
+    background: rgba(15, 23, 42, 0.4);
+    transition: background var(--transition-normal);
+}
+
+.cost-table tr:hover td {
+    background: rgba(30, 41, 59, 0.6);
+}
+
+.cost-table tr:last-child td:first-child {
+    border-bottom-left-radius: var(--radius-lg);
+}
+
+.cost-table tr:last-child td:last-child {
+    border-bottom-right-radius: var(--radius-lg);
+}
+
+.price-tag {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 8px;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.price-note {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.pros-list,
+.cons-list {
+    list-style: none;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.pros-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.pros-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: bold;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+/* ==== Friction / Scroll Lock Visuals ==== */
+.scroll-locked {
+    overflow: hidden;
+}
+
+.friction-hint {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 46, 99, 0.2);
+    color: var(--danger-light);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    border: 1px solid rgba(255, 46, 99, 0.4);
+    z-index: 2000;
+}
+
+.friction-hint.visible {
+    opacity: 1;
+    animation: shake 0.4s ease-in-out;
 }
